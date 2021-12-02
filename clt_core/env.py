@@ -9,17 +9,19 @@ import pybullet as p
 import pybullet_data
 import time
 import math
+import cv2
 
 from clt_core.util.robotics import Trajectory
 from clt_core.util.orientation import Quaternion, Affine3
-from clt_core.util.math import LineSegment2D
+from clt_core.util.math import LineSegment2D, get_distance_of_two_bbox, min_max_scale
 import clt_core.util.pybullet as bullet_util
 import math
 from clt_core.core import Env, Robot, Camera, Object
-from clt_core.util.cv_tools import PinholeCameraIntrinsics
+from clt_core.util.cv_tools import PinholeCameraIntrinsics, Feature
 
 import matplotlib.pyplot as plt
 
+import clt_assets
 
 class Button:
     def __init__(self, title):
@@ -398,7 +400,7 @@ class BulletEnv(Env):
     def load_robot_and_workspace(self):
         self.objects = []
 
-        p.setAdditionalSearchPath("../assets")  # optionally
+        p.setAdditionalSearchPath(clt_assets.PATH)  # optionally
 
         # Load robot
         k = p.loadURDF("ur5e_rs_fingerlong.urdf")
@@ -882,7 +884,7 @@ class RearrangementEnv(Env):
         else:
             p.connect(p.DIRECT)
         p.setGravity(0, 0, -10)
-        p.setAdditionalSearchPath("../assets")  # optionally
+        p.setAdditionalSearchPath(clt_assets.PATH)  # optionally
 
         # Load robot
         p.loadURDF("ur5e_rs_fingerlong.urdf")
@@ -1258,3 +1260,141 @@ class RearrangementEnv(Env):
 
         return contact
 
+
+def get_distances_from_target(obs):
+    objects = obs['full_state']['objects']
+
+    # Get target pose from full state
+    target = next(x for x in objects if x.name == 'target')
+    target_pose = np.eye(4)
+    target_pose[0:3, 0:3] = target.quat.rotation_matrix()
+    target_pose[0:3, 3] = target.pos
+
+    # Compute the distances of the obstacles from the target
+    distances_from_target = []
+    for obj in objects:
+        if obj.name in ['target', 'table', 'plane'] or obj.pos[2] < 0:
+            continue
+
+        # Transform the objects w.r.t. target (reduce variability)
+        obj_pose = np.eye(4)
+        obj_pose[0:3, 0:3] = obj.quat.rotation_matrix()
+        obj_pose[0:3, 3] = obj.pos
+
+        distance = get_distance_of_two_bbox(target_pose, target.size, obj_pose, obj.size)
+        distances_from_target.append(distance)
+    return np.array(distances_from_target)
+
+
+def empty_push(obs, next_obs, eps=0.005):
+    """
+    Checks if the objects have been moved
+    """
+
+    for prev_obj in obs['full_state']['objects']:
+        if prev_obj.name in ['table', 'plane']:
+            continue
+
+        for obj in next_obs['full_state']['objects']:
+            if prev_obj.body_id == obj.body_id:
+                if np.linalg.norm(prev_obj.pos - obj.pos) > eps:
+                    return False
+    return True
+
+
+def compute_free_space_map(push_target_map):
+    # Compute contours
+    ret, thresh = cv2.threshold(push_target_map, 127, 255, 0)
+    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,
+                                           cv2.CHAIN_APPROX_SIMPLE)
+
+    # Compute minimum distance for each point from contours
+    contour_point = []
+    for contour in contours:
+        for pt in contour:
+            contour_point.append(pt)
+
+    cc = np.zeros((push_target_map.shape[0], push_target_map.shape[1], len(contour_point), 2))
+    for i in range(len(contour_point)):
+        cc[:, :, i, :] = np.squeeze(contour_point[i])
+
+    ids = np.zeros((push_target_map.shape[0], push_target_map.shape[1], len(contour_point), 2))
+    for i in range(push_target_map.shape[0]):
+        for j in range(push_target_map.shape[1]):
+            ids[i, j, :, :] = np.array([j, i])
+
+    dist = np.min(np.linalg.norm(ids - cc, axis=3), axis=2)
+
+    # Compute min distance for each point from table limits
+    dists_surface = np.zeros((push_target_map.shape[0], push_target_map.shape[1]))
+    for i in range(push_target_map.shape[0]):
+        for j in range(push_target_map.shape[1]):
+            dists_surface[i, j] = np.min(np.array([i, push_target_map.shape[0] - i, j, push_target_map.shape[1] - j]))
+
+    map = np.minimum(dist, dists_surface)
+    min_value = np.min(map)
+    map[push_target_map > 0] = min_value
+    map = min_max_scale(map, range=[np.min(map), np.max(map)], target_range=[0, 1])
+    return map
+
+def get_heightmap(obs):
+    """
+    Computes the heightmap based on the 'depth' and 'seg'. In this heightmap table pixels has value zero,
+    objects > 0 and everything below the table <0.
+
+    Parameters
+    ----------
+    obs : dict
+        The dictionary with the visual and full state of the environment.
+
+    Returns
+    -------
+    np.ndarray :
+        Array with the heightmap.
+    """
+    rgb, depth, seg = obs['rgb'], obs['depth'], obs['seg']
+    objects = obs['full_state']['objects']
+
+    # Compute heightmap
+    table_id = next(x.body_id for x in objects if x.name == 'table')
+    depthcopy = depth.copy()
+    table_depth = np.max(depth[seg == table_id])
+    depthcopy[seg == table_id] = table_depth
+    heightmap = table_depth - depthcopy
+    return heightmap
+
+
+def unified_map(obs, crop=(192, 192), n_classes=5):
+    rgb, depth, seg = obs['rgb'], obs['depth'], obs['seg']
+    workspace_crop_area = crop
+
+    heightmap = get_heightmap(obs)
+    heightmap[heightmap < 0] = 0
+    heightmap = Feature(heightmap).crop(workspace_crop_area[0], workspace_crop_area[1]).array()
+
+    target_id = next(x.body_id for x in obs['full_state']['objects'] if x.name == 'target')
+    mask = np.zeros((rgb.shape[0], rgb.shape[1]), dtype=np.uint8)
+    mask[seg == target_id] = 255
+    mask = Feature(mask).crop(workspace_crop_area[0], workspace_crop_area[1]).array()
+
+    target_height = np.max(heightmap[mask == 255])
+    eps = 0.005
+
+    # print('target ', target_height)
+    # import matplotlib.pyplot as plt
+    # plt.imshow(heightmap)
+    # plt.show()
+
+    fused_map = np.zeros(heightmap.shape).astype(np.int32)
+    if n_classes == 5:
+        fused_map[heightmap > 0] = 128 # 4 - flat objects
+        fused_map[heightmap > target_height - eps] = 192 # 3 - equal to target
+        fused_map[heightmap > target_height + eps] = 255 # 2 - tall objects
+        fused_map[mask > 0] = 64 # 1 - target
+    elif n_classes == 3:
+        fused_map[heightmap > 0] = 255  # 4 - flat objects
+        fused_map[mask > 0] = 128  # 1 - target
+    else:
+        raise AttributeError('n_classes should be 5 or 3')
+
+    return fused_map, heightmap

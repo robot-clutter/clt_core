@@ -87,7 +87,7 @@ def transform_sec_to_timestamp(seconds):
 
 class Logger:
     def __init__(self, dir_name=None, check_exist=True):
-        self.logs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'logs'))
+        self.logs_dir = os.path.join(os.getenv('ROBOT_CLUTTER_WS'), 'clt_logs')
         # Create logging directory
         hostname, username, version, pid = get_pc_and_version()
         started_on = str(datetime.now())
