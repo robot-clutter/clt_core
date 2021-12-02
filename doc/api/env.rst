@@ -2,6 +2,6 @@
 
 .. toctree::
 
-.. automodule:: clutter.env
+.. automodule:: clt_core.env
    :members:
 

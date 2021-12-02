@@ -19,7 +19,7 @@ import sys
 
 # -- Project information -----------------------------------------------------
 
-project = 'clutter'
+project = 'clt_core'
 copyright = '2021, Iason Sarantopoulos'
 author = 'Iason Sarantopoulos'
 
@@ -28,7 +28,7 @@ version = '0.0.1'
 # The full version, including alpha/beta/rc tags
 release = ''
 
-sys.path.insert(0, os.path.abspath('../clutter'))
+sys.path.insert(0, os.path.abspath('../clt_core'))
 
 # -- General configuration ---------------------------------------------------
 
@@ -111,7 +111,7 @@ html_theme = 'sphinx_rtd_theme'
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'clutterdoc'
+htmlhelp_basename = 'cltcoredoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -148,7 +148,7 @@ latex_elements = {
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'clutter', 'clutter Documentation',
+    (master_doc, 'clt_core', 'clt_core Documentation',
      [author], 1)
 ]
 
@@ -159,8 +159,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'clutter', 'clutter Documentation',
-     author, 'clutter', 'One line description of project.',
+    (master_doc, 'clt_core', 'clt_core Documentation',
+     author, 'clt_core', 'One line description of project.',
      'Miscellaneous'),
 ]
 

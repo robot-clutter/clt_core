@@ -6,40 +6,44 @@ Installation
 Install a Python Virtual Env
 ----------------------------
 
-We recommend to use Ubuntu 20.04. Then install `python3-tk` and `virtualenv`:
+We recommend to use Ubuntu 20.04. Create a workspace for storing clt packages and the virtual environment:
 
 .. code-block:: bash
 
-    sudo apt-get install python3-tk
+    mkdir robot-clutter
+    cd robot-clutter
 
-.. code-block:: bash
-
+    sudo apt-get install python3-tk python3-pip
     sudo pip3 install virtualenv
-    virtualenv ~/clutter-env --python=python3 --prompt='[clutter-env] '
+    virtualenv env --python=python3 --prompt='[clutter-env] '
+    echo "export ROBOT_CLUTTER_WS=$PWD" >> env/bin/activate
 
-At the end of the ~/clutter-env/bin/activate` script, add the following lines:
-
-.. code-block:: bash
-
-    # If the virtualenv inherits the `$PYTHONPATH` from your system:
-    export PYTHONPATH="$VIRTUAL_ENV/lib"
-
-Then, activate the environment (you have to activate it each time you want to use it):
+Then activate the environment:
 
 .. code-block:: bash
 
- source ~/clutter-env/bin/activate
+     source env/bin/activate
 
-Install Clutter
----------------
-Clone the repository and install the package:
+Clone and install core and assets:
 
 .. code-block:: bash
 
-   git clone https://github.com/robot-clutter/clutter.git
-   cd clutter
-   pip install -e .
+    git clone https://github.com/robot-clutter/clt_assets.git
+    cd clt_assets
+    pip install -e .
+    cd ..
 
+    git clone https://github.com/robot-clutter/clt_core.git
+    cd clt_core
+    pip install -e .
+    cd ..
+
+Finally, install pytorch:
+
+.. code-block:: bash
+
+    pip3 install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
+d
 
 Generate documentation locally
 ------------------------------
@@ -48,7 +52,7 @@ If you want to generate the documentation locally run the following:
 
 .. code-block:: bash
 
-    cd doc
+    cd $ROBOT_CLUTTER_WS/clt_core/doc
     make html
 
 Then, open `doc/_build/html/index.html` on your browser.
