@@ -34,8 +34,6 @@
 # Vim backup files
 *.swp
 
-/docs
-
 # Python:
 __pycache__
 *.egg-info
