@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Core &mdash; clt_core  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Env" href="env.html" />
+    <link rel="prev" title="Code API" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> clt_core
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="main.html">Code API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env.html">Env</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Robotics Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_viz.html">Viz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_math.html">Math Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">clt_core</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="main.html">Code API</a> &raquo;</li>
+        
+      <li>Core</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/core.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-clt_core.core"></span><section id="core">
+<h1>Core<a class="headerlink" href="#core" title="Permalink to this headline">¶</a></h1>
+<p>This module defines abstract classes for different concepts, e.g. Environment, Agent, Robot.
+These abstract classes are useful for defining he interfaces used in this packages.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="clt_core.core.Env">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clt_core.core.</span></span><span class="sig-name descname"><span class="pre">Env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for creating an Environment for a Markov Decision Process. An environment could be a PyBullet simulation,
+Mujoco Simulation or a real robotic environment. The interfaces that an environment should provide are:</p>
+<ul class="simple">
+<li><p>reset(): Resets the environment for a new episode. E.g. creates randomly objects on a table for singulation.</p></li>
+<li><p>step(action): Moves one step in time given an action.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – A string with the name of the environment.</p></li>
+<li><p><strong>params</strong> (<em>dict</em>) – A dictionary with parameters for the environment.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Env.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Env.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the environment. Basically it creates the initial state of the MDP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The observation after the reset.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Env.seed">
+<span class="sig-name descname"><span class="pre">seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Env.seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement it for seeding the random generators of the environment, if it implements any stochasticity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> (<em>int</em>) – The seed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Env.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Env.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the environment one step forward in time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>action</strong> – An action to perform.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The observation after the step.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="clt_core.core.MDP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clt_core.core.</span></span><span class="sig-name descname"><span class="pre">MDP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.MDP" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – A string with the name of the environment.</p></li>
+<li><p><strong>params</strong> (<em>dict</em>) – A dictionary with parameters for the environment.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.MDP.action">
+<span class="sig-name descname"><span class="pre">action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_action</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.MDP.action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives an action produced by an agent (e.g. the output of a network in [-1, 1] range) and transform it to
+an action for the environment (e.g. coordinates to be reached by the robot.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.MDP.reset_goal">
+<span class="sig-name descname"><span class="pre">reset_goal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.MDP.reset_goal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement it for Goal MDPs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.MDP.reward">
+<span class="sig-name descname"><span class="pre">reward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next_env_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.MDP.reward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the reward for the given env_state, next env state and action.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.MDP.state_representation">
+<span class="sig-name descname"><span class="pre">state_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.MDP.state_representation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a raw state from the environment (RGBD, mask, simulation state) and transforms it in a feature to be
+fed to an agent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.MDP.terminal">
+<span class="sig-name descname"><span class="pre">terminal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next_env_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.MDP.terminal" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Returns an integer indicating the id of the terminal state. There are different types of ids:</dt><dd><ul class="simple">
+<li><p>id = 0: Not a terminal state (the episode does not terminate)</p></li>
+<li><p>id &gt; 0: Typical terminal state, the episode terminates.</p></li>
+<li><dl class="simple">
+<dt>-10 &lt; id &lt; 0: A terminal state that is considered terminal by the learning algorithm, but the episode</dt><dd><p>continuous in order to collect more data. This is useful when an action does not change
+the state of the environment.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>id &lt;= -10: Invalid terminal state. The episode will terminate without logging the last transition and</dt><dd><p>without calling agent.learn() for this transition.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>action</strong> – An action to perform.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The id of the terminal state.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="clt_core.core.Push">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clt_core.core.</span></span><span class="sig-name descname"><span class="pre">Push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Push" title="Permalink to this definition">¶</a></dt>
+<dd><p>A pushing action of two 3D points for init and final pos. Every pushing
+action should inherite this class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Push.rotate">
+<span class="sig-name descname"><span class="pre">rotate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Push.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rot: rotation matrix</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Push.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Push.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ref frame</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="clt_core.core.Robot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clt_core.core.</span></span><span class="sig-name descname"><span class="pre">Robot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for a robot, which can be a simulated robot or a real one. Each robot should provide interfaces for
+measuring joint states and commanding joint commands. A Robot is used by an Env.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – A string with the name of the robot.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Robot.get_joint_position">
+<span class="sig-name descname"><span class="pre">get_joint_position</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot.get_joint_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the positions of the robot’s joints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of floats in rad for the joint positions of the robot.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Robot.get_joint_velocity">
+<span class="sig-name descname"><span class="pre">get_joint_velocity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot.get_joint_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the velocities of the robot’s joints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of floats in rad/sec for the joint velocities of the robot.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Robot.get_task_pose">
+<span class="sig-name descname"><span class="pre">get_task_pose</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot.get_task_pose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Cartesian pose of the end effector with respect the base frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>list</em> – The position of the end-effector as a list with 3 elements</p></li>
+<li><p><em>Quaternion</em> – The orientation of the end-effector as quaternion</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Robot.reset_joint_position">
+<span class="sig-name descname"><span class="pre">reset_joint_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot.reset_joint_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the joint positions of the robot by teleporting it.
+This is of course for a simulated robot, not a real one :).
+For real robots just call set_joint_trajectory to smoothly move the root.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>joint_position</strong> (<em>list</em>) – A list of floats in rad for the commanded joint positions of the robot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Robot.reset_task_pose">
+<span class="sig-name descname"><span class="pre">reset_task_pose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot.reset_task_pose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets/Teleports the robot to the desired pose.
+This is of course for a simulated robot, not a real one :).
+For real robots just call set_task_pose_trajectory to smoothly move the robot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos</strong> (<em>list</em>) – The desired position of the end-effector as a list with 3 elements</p></li>
+<li><p><strong>quat</strong> (<em>Quaternion</em>) – The desired orientation of the end-effector as quaternion</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Robot.set_joint_position">
+<span class="sig-name descname"><span class="pre">set_joint_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot.set_joint_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commands the robot with desired joint positions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>joint_position</strong> (<em>list</em>) – A list of floats in rad for the commanded joint positions of the robot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Robot.set_joint_trajectory">
+<span class="sig-name descname"><span class="pre">set_joint_trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot.set_joint_trajectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commands the robot with a desired joint configuration be reached with 5th order spline.
+The reaching is performed in a straight line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>joint</strong> (<em>list</em>) – The joint configuration to be reached in rad.</p></li>
+<li><p><strong>duration</strong> (<em>float</em>) – The duration of the motion</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Robot.set_joint_velocity">
+<span class="sig-name descname"><span class="pre">set_joint_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_velocity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot.set_joint_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commands the robot with desired joint velocities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>joint_velocity</strong> (<em>list</em>) – A list of floats in rad/sec for the commanded joint velocities of the robot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Robot.set_task_pose">
+<span class="sig-name descname"><span class="pre">set_task_pose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot.set_task_pose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commands the robot with a desired cartesian pose. This should solve the inverse kinematics of the robot for the
+desired pose and call set_joint_position. Returns the Cartesian pose of the end effector with respect the base
+frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos</strong> (<em>list</em>) – The position of the end-effector as a list with 3 elements</p></li>
+<li><p><strong>quat</strong> (<em>Quaternion</em>) – The orientation of the end-effector as quaternion</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clt_core.core.Robot.set_task_pose_trajectory">
+<span class="sig-name descname"><span class="pre">set_task_pose_trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.Robot.set_task_pose_trajectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commands the robot with a desired cartesian pose to be reached. The reaching is performed in a straight line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos</strong> (<em>list</em>) – The position of the end-effector as a list with 3 elements</p></li>
+<li><p><strong>quat</strong> (<em>Quaternion</em>) – The orientation of the end-effector as quaternion</p></li>
+<li><p><strong>duration</strong> (<em>float</em>) – The duration of the motion</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="clt_core.core.run_episode">
+<span class="sig-prename descclassname"><span class="pre">clt_core.core.</span></span><span class="sig-name descname"><span class="pre">run_episode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clt_core.core.run_episode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs an episode. Useful for training or evaluating RL agents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env</strong> (<a class="reference internal" href="#clt_core.core.Env" title="clt_core.core.Env"><em>Env</em></a>) – An object of an environment.</p></li>
+<li><p><strong>agent</strong> (<a class="reference internal" href="#clt_core.core.MDP" title="clt_core.core.MDP"><em>MDP</em></a>) – An object of an Agent.</p></li>
+<li><p><strong>agent</strong> – An object of an MDP.</p></li>
+<li><p><strong>max_steps</strong> (<em>int</em>) – The maximum steps to run the episode.</p></li>
+<li><p><strong>train</strong> (<em>bool</em>) – Set True for a training episode and False for an evaluation episode. In particular, if true the agent.explore()
+will be called instead of agent.predict(). Also the agent.learn() will be called for updating the agent’s
+policy.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of N dictionaries, where N the total number of timesteps the episode performed. Each dictionary contains
+data for each step, such as the Q-value, the reward and the terminal state’s id.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="env.html" class="btn btn-neutral float-right" title="Env" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="main.html" class="btn btn-neutral float-left" title="Code API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Iason Sarantopoulos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
